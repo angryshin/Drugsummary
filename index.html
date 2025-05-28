@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>약정리 비서 - DUR 스타일 정리</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 약정리 비서</h1>
+            <p>약물 처방 데이터를 DUR 스타일로 정리해드립니다</p>
+        </header>
+
+        <div class="api-key-section">
+            <label for="apiKey">Gemini API Key:</label>
+            <input type="password" id="apiKey" placeholder="Gemini API 키를 입력하세요">
+            <button id="saveApiKey">저장</button>
+            <span id="apiKeyStatus"></span>
+        </div>
+
+        <div class="input-section">
+            <label for="inputData">약물 처방 데이터 입력:</label>
+            <textarea id="inputData" placeholder="약물 처방 데이터를 입력하세요...
+예시: 20250428 073400330 리피토정20밀리그램(아토르바스타틴칼슘삼수화물)_(21.7mg/1정) atorvastatin calcium (as atorvastatin) 1 1정 1 30"></textarea>
+            <button id="processData" disabled>DUR 스타일로 정리하기</button>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>처리 중입니다...</p>
+        </div>
+
+        <div class="output-section" id="outputSection" style="display: none;">
+            <label>정리된 결과:</label>
+            <div class="output-container">
+                <pre id="outputData"></pre>
+                <button id="copyResult">📋 복사하기</button>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3>📚 용어 정의</h3>
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>형태 약어</h4>
+                    <ul>
+                        <li>정 = T</li>
+                        <li>캡슐 = C</li>
+                        <li>주사 = SYR</li>
+                        <li>크림/튜브 = TU</li>
+                    </ul>
+                </div>
+                <div class="info-card">
+                    <h4>복용 시간 약어</h4>
+                    <ul>
+                        <li>D: 하루 1회</li>
+                        <li>DE: 하루 1회 (저녁)</li>
+                        <li>B: 하루 2회</li>
+                        <li>SC: 피하주사</li>
+                        <li>OIHS: 병변 피부에 도포</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
