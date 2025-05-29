@@ -144,7 +144,6 @@ class DrugOrganizerAssistant {
 DUR
 
 2025/04/28
-테그레톨정200밀리그램(카르바마제핀) 0.5정, 일일 2회, 5일
 우루리버정 100mg (ursodeoxycholic acid) 1정, 일일 2회, 30일
 
 ###Input###
