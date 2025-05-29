@@ -100,6 +100,21 @@ button:disabled {
     box-shadow: none;
 }
 
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.secondary-btn {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+}
+
+.secondary-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+}
+
 #apiKeyStatus {
     margin-left: 10px;
     font-weight: 600;

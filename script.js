@@ -12,6 +12,7 @@ class DrugOrganizerAssistant {
         this.apiKeyStatus = document.getElementById('apiKeyStatus');
         this.inputData = document.getElementById('inputData');
         this.processBtn = document.getElementById('processData');
+        this.clearBtn = document.getElementById('clearData');
         this.loading = document.getElementById('loading');
         this.outputSection = document.getElementById('outputSection');
         this.outputData = document.getElementById('outputData');
@@ -21,6 +22,7 @@ class DrugOrganizerAssistant {
     bindEvents() {
         this.saveApiKeyBtn.addEventListener('click', () => this.saveApiKey());
         this.processBtn.addEventListener('click', () => this.processData());
+        this.clearBtn.addEventListener('click', () => this.clearData());
         this.copyBtn.addEventListener('click', () => this.copyResult());
         this.inputData.addEventListener('input', () => this.toggleProcessButton());
     }
@@ -121,38 +123,43 @@ class DrugOrganizerAssistant {
     }
 
     createPrompt(inputText) {
-        return `다음 약물 처방 데이터를 기반으로 DUR 스타일로 정리된 출력 텍스트를 생성하세요.
+        return `###Instruction###
+다음 약물 처방 데이터를 기반으로 DUR 스타일로 정리된 출력 텍스트를 생성하세요.
 
 조건:
 - 첫 줄에 "DUR"라고 표기하세요.
-- 날짜는 첫 줄 다음 줄에 YYYY/MM/DD 형식으로 한 번만 출력합니다.
-- 이후 각 약물은 한 줄씩 출력하며, 다음 형식으로 정리합니다:
-
-  [약품명 (성분명)] [용량] [형태 약어] [횟수] 회 [시간 약어] [기간]일
-
-- 성분명은 가능하면 영어로 표현하세요.
+- 날짜는 YYYY/MM/DD 형식으로 출력합니다.
+- 같은 날짜에 여러 약물이 처방된 경우, 날짜는 한 번만 표시합니다.
+- 각 약물은 한 줄로 요약하며, 다음 요소를 포함합니다:
+  * 상품명(성분명 영어)
+  * 복용 단위 (예: 1정, 0.5정, 1캡슐, 30g 등)
+  * 1일 복용 횟수 (예: 일일 2회)
+  * 치료 기간 (예: 5일, 14일, 30일)
+- 약물명이 너무 길거나 복잡한 경우, 상품명과 성분명으로 최대한 간결하게 표기합니다.
+- 성분명은 가능한 영어로 표기합니다.
+- 분할 투여(예: 0.5정 등)나 연고, 액제 등의 단위는 정확히 반영합니다.
+- 입력 데이터의 약품코드와 성분코드는 무시하고 처리하세요.
 
 예시:
-리피토정 20mg (atorvastatin calcium) 1 T 1 회 D 30일
+DUR
 
-용어 정의:
-- 형태 약어: 정 = T, 캡슐 = C, 주사 = SYR, 크림/튜브 = TU
-- 복용 시간 약어:
-  - D: 하루 1회
-  - DE: 하루 1회 (저녁)
-  - B: 하루 2회
-  - SC: 피하주사
-  - OIHS: 병변 피부에 도포
+2025/04/28
+테그레톨정200밀리그램(카르바마제핀) 0.5정, 일일 2회, 5일
+우루리버정 100mg (ursodeoxycholic acid) 1정, 일일 2회, 30일
 
-입력 데이터:
+###Input###
 ${inputText}
 
-출력은 복사 및 붙여넣기 편한 plaintext 형식으로 제공하고, 코드 블록 없이 바로 결과만 출력하세요.`;
+###OutputFormat###
+코드 블록(\`\`\`)으로 감싸서 출력하세요.`;
     }
 
     displayResult(result) {
         // 코드 블록 제거 (```plaintext 또는 ``` 등)
         let cleanResult = result.replace(/```[\w]*\n?/g, '').trim();
+        
+        // 결과를 코드 블록으로 감싸기
+        cleanResult = '```\n' + cleanResult + '\n```';
         
         this.outputData.textContent = cleanResult;
         this.outputSection.style.display = 'block';
@@ -181,6 +188,13 @@ ${inputText}
             console.error('복사 실패:', error);
             alert('복사에 실패했습니다. 수동으로 복사해주세요.');
         }
+    }
+
+    clearData() {
+        this.inputData.value = '';
+        this.outputData.textContent = '';
+        this.outputSection.style.display = 'none';
+        this.toggleProcessButton();
     }
 }
 
