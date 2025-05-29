@@ -23,8 +23,8 @@
         <div class="input-section">
             <label for="inputData">약물 처방 데이터 입력:</label>
             <textarea id="inputData" placeholder="약물 처방 데이터를 입력하세요...
-형식: 조제일자 약품코드 약품명 성분명 투약량 함량 횟수 일수 성분코드
-예시: 20250428 073400330 테그레톨정200밀리그램 carbamazepine 0.5 200mg 2 5 A123456
+입력 순서: 조제일자 약품코드 약품명 성분명 투약량(복용단위) 함량 횟수 일수 성분코드
+예시: 20250428 073400330 테그레톨정200밀리그램(카르바마제핀) carbamazepine 0.5정 200mg 2 5 A123456
 ※ 약품코드와 성분코드는 자동으로 무시됩니다."></textarea>
             <div class="button-group">
                 <button id="processData" disabled>DUR 스타일로 정리하기</button>
@@ -44,6 +44,11 @@
                 <button id="copyResult">📋 복사하기</button>
             </div>
         </div>
+
+        <footer class="footer-section">
+            <p>Kangdong Sacred Heart Hospital</p>
+            <p>Made by SDH</p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
