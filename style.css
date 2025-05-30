@@ -256,6 +256,24 @@ textarea:focus {
     border-bottom: none;
 }
 
+.footer-section {
+    background: #f8f9fa;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #eee;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.footer-section p {
+    margin: 5px 0;
+}
+
+.footer-section p:first-child {
+    font-weight: 600;
+    color: #4facfe;
+}
+
 @media (max-width: 768px) {
     body {
         padding: 10px;
