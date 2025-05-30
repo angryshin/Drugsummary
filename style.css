@@ -62,18 +62,24 @@ header p {
 }
 
 .api-key-section input {
-    width: 70%;
+    width: 60%;
     padding: 12px 15px;
     border: 2px solid #ddd;
     border-radius: 10px;
     font-size: 1rem;
-    margin-right: 10px;
     transition: border-color 0.3s ease;
 }
 
 .api-key-section input:focus {
     outline: none;
     border-color: #4facfe;
+}
+
+.api-key-section .input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 button {
@@ -116,8 +122,9 @@ button:disabled {
 }
 
 #apiKeyStatus {
-    margin-left: 10px;
     font-weight: 600;
+    white-space: nowrap;
+    min-width: 200px;
 }
 
 #apiKeyStatus.success {
@@ -295,6 +302,17 @@ textarea:focus {
         width: 100%;
         margin-bottom: 10px;
         margin-right: 0;
+    }
+    
+    .api-key-section .input-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    #apiKeyStatus {
+        min-width: auto;
+        text-align: center;
+        margin-top: 10px;
     }
     
     .info-grid {
